@@ -296,6 +296,7 @@ canvas{
 .bottompics{
     display:flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .bottompic{
@@ -315,6 +316,6 @@ canvas{
     background: linear-gradient(180deg, rgba(90,134,173,1) 0%, rgba(255,255,255,1) 100%);
     color: rgb(255, 255, 255);
 
-    font-family: 'Alegreya Sans SC', sans-serif;
+    font-family: 'Alegreya Sans SC', sans-serif; 
     text-align: center;
 }
