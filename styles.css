@@ -1,4 +1,4 @@
-
+/* STYLE */
 @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC&display=swap');
 body{
@@ -296,6 +296,7 @@ canvas{
 .bottompics{
     display:flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .bottompic{
@@ -315,6 +316,6 @@ canvas{
     background: linear-gradient(180deg, rgba(90,134,173,1) 0%, rgba(255,255,255,1) 100%);
     color: rgb(255, 255, 255);
 
-    font-family: 'Alegreya Sans SC', sans-serif;
+    font-family: 'Alegreya Sans SC', sans-serif; 
     text-align: center;
 }
