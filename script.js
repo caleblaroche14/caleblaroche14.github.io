@@ -1,112 +1,43 @@
-// Initial Setup
-const canvas = document.querySelector('canvas')
-const c = canvas.getContext('2d')
 
-canvas.width = innerWidth
-canvas.height = innerHeight
+var body = document.body , html = document.documentElement;
+var ph = Math.max( body.scrollHeight, body.offsetHeight, 
+    html.clientHeight, html.scrollHeight, html.offsetHeight );;
+var sh = window.innerHeight;
+var scrollPosition = window.pageYOffset;
+var windowSize     = window.innerHeight;
+var bodyHeight     = document.body.offsetHeight;
 
-// Variables
-const attributes = {
-  particleCount: 100,   // Change amount of snowflakes
-  particleSize: 4,      // Max size of a snowflake
-  fallingSpeed: 1,      // Intensity of the snowfall horizontal
-  colors: ['#fff', '#fff', '#fff', '#fff'] // Array of usable colors
+var bottompic = document.getElementById('bottompic');
+var viewphotos = document.getElementById('viewphotos');
+
+var links = document.querySelector("#body > div > div.middle > div");
+
+function scrollDist(){
+    //scrollPosition = window.pageYOffset;
+    //windowSize     = window.innerHeight;
+    //bodyHeight     = document.body.offsetHeight;
+    bblur = getDist(window.pageYOffset,window.innerHeight,document.body.offsetHeight,22)
+    lblur = getDist(window.pageYOffset,window.innerHeight,links.offsetHeight,1);
+    console.log(window.pageYOffset,window.innerHeight,links.offsetHeight,1);
+    //blurScale = 22;
+    //blur = (Math.max(bodyHeight - (scrollPosition + windowSize), 0))/blurScale;
+    bottompic.style.webkitFilter = (`blur(${bblur}px)`);
+    viewphotos.style.top = (`${bblur+30}%`);
 }
 
-const mouse = {
-    x: innerWidth / 2,
-    y: innerHeight / 2
+setInterval(scrollDist,1);
+
+window.addEventListener('resize', function(event) {
+    scrollPosition = window.pageYOffset;
+    windowSize     = window.innerHeight;
+    bodyHeight     = document.body.offsetHeight;
+}, true);
+
+function getDist(sp,ws,bh,bs){
+    var scrollPosition = sp;
+    var windowSize     = ws;
+    var bodyHeight     = bh;
+    var blurScale      = bs;
+
+    return (Math.max(bodyHeight - (scrollPosition + windowSize), 0))/blurScale;
 }
-
-
-// Event Listeners
-addEventListener('mousemove', event => {
-    mouse.x = event.clientX
-    mouse.y = event.clientY
-})
-
-addEventListener('resize', () => {
-    canvas.width = innerWidth
-    canvas.height = innerHeight
-    init()
-})
-
-// Utility Functions
-function randomIntFromRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-function randomColor(colors) {
-    return colors[Math.floor(Math.random() * colors.length)]
-}
-
-function distance(x1, y1, x2, y2) {
-    const xDist = x2 - x1
-    const yDist = y2 - y1
-
-    return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2))
-}
-
-// Objects
-function Particle(x, y, radius, color, radians) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.color = color;
-    this.radians = radians;
-    this.velocity = 0.005;
-
-    this.update = () => {
-        // Move these points over time
-        this.radians += this.velocity;
-        this.x = x + Math.cos(this.radians) * 400 ;
-        this.y = y + Math.tan(this.radians) * 600 ;
-
-        this.draw();
-    }
-
-    this.draw = () => {
-        c.beginPath()
-        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
-        c.fillStyle = this.color
-        c.fill()
-
-        c.closePath()
-    }
-}
-
-// Implementation
-let particles;
-function init() {
-    particles = [];
-
-    for (let i = 0; i < attributes.particleCount; i++) {
-        particles.push(
-          new Particle(
-            Math.random() * canvas.width,
-            Math.random() * canvas.height,
-            randomIntFromRange(0.5, attributes.particleSize),
-            randomColor(attributes.colors),
-            Math.random() * 80
-          )
-        );
-    }
-    console.log(particles);
-}
-
-// Animation Loop
-function animate() {
-    requestAnimationFrame(animate)
-    c.clearRect(0, 0, canvas.width, canvas.height)
-
-    particles.forEach(particle => {
-     particle.update();
-    });
-}
-
-
-
-canvas.width = innerWidth
-canvas.height = innerHeight
-init()
-animate()
