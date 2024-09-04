@@ -6,6 +6,41 @@ html{
     background-color: #b87231b2;
 
 }
+
+.mainflex{
+    display: flex;
+    flex-direction: column;
+}
+
+.hanktitle{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    height: 10px;
+    margin: 10px;
+}
+
+.hankpic{
+    height: 550px;
+    
+}
+
+.hankpics{
+    overflow-y: hidden;
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+
+    padding-top: 10px;
+}
+
+.hank{
+    height: 570px;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to right bottom, #626262, #707070, #7e7e7e, #8c8c8c, #9b9b9b);
+}
+
 body{
     margin: 0px;
     height: 100%;
